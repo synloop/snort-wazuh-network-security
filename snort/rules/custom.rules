@@ -1,0 +1,6 @@
+alert icmp any any -> any any (msg:"ICMP Ping detected"; sid:1000001; rev:1;)
+alert icmp !$HOME_NET any -> $HOME_NET any (msg:"Inbound ICMP Ping"; sid:1000002; rev:1;)
+alert udp any any -> any 53 (msg:"DNS request with youtube"; content:"youtube"; nocase; sid:1000003; rev:2;)
+alert tcp any any -> $HOME_NET any (flags:S; msg:"Possible Nmap Scan"; threshold:type threshold, track by_src, count 10, seconds 60; sid:1000004; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Brute Force attempt"; flags:S; threshold:type threshold, track by_src, count 4, seconds 60; sid:1000005; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"[ALERT] Possible Data Exfiltration (large TCP payload)"; dsize:>1000; sid:10000012; rev:1;)
