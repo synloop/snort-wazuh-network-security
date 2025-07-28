@@ -1,0 +1,2 @@
+-a always,exit -F arch=b64 -S sendto -k ping_detect
+-a always,exit -F arch=b32 -S sendto -k ping_detect
