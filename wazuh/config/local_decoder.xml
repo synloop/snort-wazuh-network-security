@@ -1,0 +1,12 @@
+<decoders>
+  <decoder name="icmp_packet_prefix">
+    <prematch>ICMP_PACKET:</prematch>
+  </decoder>
+
+  <!-- SRC/DST extraction -->
+  <decoder name="icmp_packet_addrs">
+    <parent>icmp_packet_prefix</parent>
+    <regex offset="after_prematch">SRC=([^ ]+) DST=([^ ]+)</regex>
+    <order>srcip,dstip</order>
+  </decoder>
+</decoders>
